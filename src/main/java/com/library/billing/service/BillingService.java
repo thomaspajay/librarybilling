@@ -16,7 +16,8 @@ public class BillingService {
 		double  totDue=0.00;
 		long days = ChronoUnit.DAYS.between(fromD.toInstant(), toD.toInstant());
 		days++;
-		
+		if(days<1) 
+			return -1.00;
 		if(days <=slab1days)
 			totDue= price*0.05*days;
 		else if(days > slab1days){

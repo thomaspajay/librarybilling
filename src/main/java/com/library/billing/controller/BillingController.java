@@ -5,9 +5,11 @@ import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,16 +29,16 @@ public class BillingController {
 			return "Library Billiing Service is up !!!";
 		}
 
-		@RequestMapping("/api/v1/billing/{book}")
+		@RequestMapping(value="/api/v1/billing/{book}",method=RequestMethod.GET)
 		public BillingInfo getDueforBook(@PathVariable String book, @RequestParam  ("fromDate") String fromDate,
 				@RequestParam  ("toDate") String toDate,@RequestParam  ("price") Double price ) throws ParseException {
 			BillingInfo msg = new BillingInfo(book, service.getBilling(format.parse(fromDate), format.parse(toDate) , price));
 			return  msg;
 		}
 		
-		@RequestMapping("/api/v1/billing/")
+		@RequestMapping(value ="/api/v1/billing/", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 		public ResponseEntity<String> getDue( @RequestParam  ("fromDate") String fromDate,
 				@RequestParam  ("toDate") String toDate,@RequestParam  ("price") Double price ) throws ParseException {
-			return new ResponseEntity<String>("totalDue:"+service.getBilling(format.parse(fromDate), format.parse(toDate) , price),HttpStatus.OK);
+			return new ResponseEntity<String>("{totalDue:"+service.getBilling(format.parse(fromDate), format.parse(toDate) , price)+"}",HttpStatus.OK);
 		}
 }

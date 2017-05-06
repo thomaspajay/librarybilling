@@ -1,19 +1,12 @@
 package com.library.billing;
 
 import java.util.Calendar;
-import java.util.Date;
-
-import org.junit.Test;
 
 import com.library.billing.service.BillingService;
 
 import junit.framework.TestCase;
 
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(classes = {BillingConfiguration.class, BillingConfiguration.class})
-//@WebAppConfiguration*/
-
-public class BillingTest extends TestCase {
+public class BillingServiceTest extends TestCase {
 
 	BillingService  service = new BillingService();
 	
