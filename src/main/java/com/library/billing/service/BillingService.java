@@ -5,6 +5,8 @@ import java.util.Date;
 
 import org.springframework.stereotype.Service;
 
+import com.library.billing.model.BillingInfo;
+
 @Service
 public class BillingService {
 	Long slab1days= 21l;
@@ -12,9 +14,9 @@ public class BillingService {
 	Double slab2Fine=500.00;
 	Double slab3FineperDay=50.00;
 	
-	public Double  getBilling(Date fromD,Date toD,Double price){
+	public Double  getBilling(Date fromDate,Date toDate,Double price){
 		double  totDue=0.00;
-		long days = ChronoUnit.DAYS.between(fromD.toInstant(), toD.toInstant());
+		long days = ChronoUnit.DAYS.between(fromDate.toInstant(), toDate.toInstant());
 		days++;
 		if(days<1) 
 			return -1.00;
@@ -29,5 +31,13 @@ public class BillingService {
 			totDue+= days*slab3FineperDay;
 		}
 		return totDue;	
+	}
+	public BillingInfo  getBillingForBook(Date fromDate,Date toDate,String bookId){
+		
+		// TODO 
+		// API call to get the price for book 	
+		double price = 10.0;
+		
+		return new BillingInfo( bookId,getBilling(fromDate,toDate,price));	
 	}
 }

@@ -29,11 +29,10 @@ public class BillingController {
 			return "Library Billiing Service is up !!!";
 		}
 
-		@RequestMapping(value="/api/v1/billing/{book}",method=RequestMethod.GET)
-		public BillingInfo getDueforBook(@PathVariable String book, @RequestParam  ("fromDate") String fromDate,
-				@RequestParam  ("toDate") String toDate,@RequestParam  ("price") Double price ) throws ParseException {
-			BillingInfo msg = new BillingInfo(book, service.getBilling(format.parse(fromDate), format.parse(toDate) , price));
-			return  msg;
+		@RequestMapping(value="/api/v1/billing/{book}",method=RequestMethod.GET , produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+		public ResponseEntity<BillingInfo> getDueforBook(@PathVariable String book, @RequestParam  ("fromDate") String fromDate,
+				@RequestParam  ("toDate") String toDate) throws ParseException {
+			return new ResponseEntity<BillingInfo>(service.getBillingForBook(format.parse(fromDate), format.parse(toDate), book),HttpStatus.OK);
 		}
 		
 		@RequestMapping(value ="/api/v1/billing/", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
