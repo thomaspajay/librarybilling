@@ -3,20 +3,12 @@ package com.library.billing;
 import java.util.Calendar;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.library.billing.conf.BillingConfiguration;
-import com.library.billing.conf.BillingServiceInitializer;
 import com.library.billing.service.BillingService;
 
 import junit.framework.TestCase;
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { BillingConfiguration.class, BillingServiceInitializer.class })
 public class BillingServiceTest extends TestCase {
 
-	//@Autowired
 	BillingService  service = new BillingService();
 	
 	@Test
